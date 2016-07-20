@@ -1,50 +1,50 @@
-const startSpinner = function () {
-  document.getElementById('spinner').style.display = 'block';
-};
-
-const stopSpinner = function () {
-  document.getElementById('spinner').style.display = 'none';
-};
-
-const updateStatus = function (status, fail) {
-  document.getElementById('statusText').innerHTML = status;
-  fail ? document.getElementById('statusText').style.color = 'red' : document.getElementById('statusText').style.color = '';
-};
-
-const httpGetAsync = function (theUrl, callback, variables) {
-  const xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = function () {
-    if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+var httpGetAsync = function(theUrl, callback, variables){
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function() {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
       callback(xmlHttp.responseText, variables);
-    } else if (xmlHttp.readyState === 4) {
+    else if (xmlHttp.readyState == 4) {
       stopSpinner();
-      updateStatus('Something went wrong...', true);
+      updateStatus('Something went wrong...', true)
     }
-  };
-  xmlHttp.open('GET', theUrl, true); // true for asynchronous
+  }
+  xmlHttp.open("GET", theUrl, true); // true for asynchronous
   xmlHttp.send(null);
-};
+}
 
-const daysPlayed = [];
-const charactersChecked = [];
-const dayMax = 0;
-const activitiesLoaded = 0;
+var startSpinner = function(){
+  document.getElementById('spinner').style.display = "block";
+}
 
-const daysPlayedCallback = function (days, max) {
-  if (max > 86400) { max = 86400; }
-  const width = 960;
-  const height = 136;
-  const cellSize = 17; // cell size
+var stopSpinner = function(){
+  document.getElementById('spinner').style.display = "none";
+}
 
-  const format = d3.time.format("%Y-%m-%d");
+var updateStatus = function (status, fail) {
+  document.getElementById('statusText').innerHTML = status;
+  fail ? document.getElementById('statusText').style.color = "red" : document.getElementById('statusText').style.color = "";
+}
 
-  let range = 11;
-  if (pathArray[2] === 'fixed') {
+var daysPlayed = new Array();
+var charactersChecked = new Array();
+var dayMax = 0;
+var activitiesLoaded = 0;
+
+var daysPlayedCallback = function(days, max) {
+  if (max > 86400) max = 86400;
+  var width = 960,
+      height = 136,
+      cellSize = 17; // cell size
+
+  var format = d3.time.format("%Y-%m-%d");
+
+  var range = 11;
+  if (pathArray[2] == 'fixed') {
     range = 24;
     max = 86400;
   }
 
-  const color = d3.scale.quantize()
+  var color = d3.scale.quantize()
       .domain([0, max])
       .range(d3.range(range).map(function(d) { return "q" + d + "-" + range; }));
 
@@ -134,10 +134,10 @@ var characterCallback = function(results, variables) {
   }
   if (json && json.Response && json.Response.data && json.Response.data.activities && json.Response.data.activities.length) {
     activitiesLoaded += json.Response.data.activities.length;
-    // console.log('json exists')
+    console.log('json exists')
     updateStatus('Compiling activity data for ' + username + ' on ' + platform + '. This could take awhile...');
     json.Response.data.activities.forEach(function(activity) {
-      // console.log('activity loop')
+      console.log('activity loop')
       if (activity && activity.period && activity.values.activityDurationSeconds && activity.values.activityDurationSeconds.basic && activity.values.activityDurationSeconds.basic.value) {
         var dateObject = new Date(activity.period);
         var month = dateObject.getMonth() + 1;
@@ -168,8 +168,8 @@ var characterCallback = function(results, variables) {
       if (!charactersChecked[key]) allTrue = false;
     }
     if (allTrue) {
-      // console.log(daysPlayed);
-      // console.log(dayMax);
+      console.log(daysPlayed);
+      console.log(dayMax);
       stopSpinner();
       updateStatus('');
       daysPlayedCallback(daysPlayed, dayMax);
