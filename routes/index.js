@@ -18,7 +18,7 @@ router.get('/Platform/*?', function (req, res) {
   res.setTimeout(25000);
   var options = {
     url: 'https://www.bungie.net/' + req.originalUrl,
-    headers: {'X-API-Key': process.env.BUNGIE_KEY}
+    headers: {'X-API-Key': 'c1eff700917547f9b7ace07118dd4e84'}
   };
   try {
     request(options, function (error, response, body) {
