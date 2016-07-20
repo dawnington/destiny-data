@@ -1,50 +1,50 @@
-var httpGetAsync = function(theUrl, callback, variables){
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = function() { 
-    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-      callback(xmlHttp.responseText, variables);
-    else if (xmlHttp.readyState == 4) {
-      stopSpinner();
-      updateStatus('Something went wrong...', true)
-    }
-  }
-  xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-  xmlHttp.send(null);
-}
+const startSpinner = function () {
+  document.getElementById('spinner').style.display = 'block';
+};
 
-var startSpinner = function(){
-  document.getElementById('spinner').style.display = "block";
-}
+const stopSpinner = function () {
+  document.getElementById('spinner').style.display = 'none';
+};
 
-var stopSpinner = function(){
-  document.getElementById('spinner').style.display = "none";
-}
-
-var updateStatus = function (status, fail) {
+const updateStatus = function (status, fail) {
   document.getElementById('statusText').innerHTML = status;
-  fail ? document.getElementById('statusText').style.color = "red" : document.getElementById('statusText').style.color = "";
-}
+  fail ? document.getElementById('statusText').style.color = 'red' : document.getElementById('statusText').style.color = '';
+};
 
-var daysPlayed = new Array();
-var charactersChecked = new Array();
-var dayMax = 0;
-var activitiesLoaded = 0;
+const httpGetAsync = function (theUrl, callback, variables) {
+  const xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+      callback(xmlHttp.responseText, variables);
+    } else if (xmlHttp.readyState === 4) {
+      stopSpinner();
+      updateStatus('Something went wrong...', true);
+    }
+  };
+  xmlHttp.open('GET', theUrl, true); // true for asynchronous
+  xmlHttp.send(null);
+};
 
-var daysPlayedCallback = function(days, max) {
-  if (max > 86400) max = 86400;
-  var width = 960,
-      height = 136,
-      cellSize = 17; // cell size
+const daysPlayed = [];
+const charactersChecked = [];
+const dayMax = 0;
+const activitiesLoaded = 0;
 
-  var format = d3.time.format("%Y-%m-%d");
-  
-  var range = 11;
-  if (pathArray[2] == 'fixed') {
+const daysPlayedCallback = function (days, max) {
+  if (max > 86400) { max = 86400; }
+  const width = 960;
+  const height = 136;
+  const cellSize = 17; // cell size
+
+  const format = d3.time.format("%Y-%m-%d");
+
+  let range = 11;
+  if (pathArray[2] === 'fixed') {
     range = 24;
     max = 86400;
   }
-  
-  var color = d3.scale.quantize()
+
+  const color = d3.scale.quantize()
       .domain([0, max])
       .range(d3.range(range).map(function(d) { return "q" + d + "-" + range; }));
 
@@ -89,13 +89,13 @@ var daysPlayedCallback = function(days, max) {
         var minutes = parseInt(days[d]/60) % 60;
         return d + ": " + hours + " hours " + minutes + " minutes";
       });
-      
+
   var destinyDays = new Array();
   destinyDays['2014-09-09'] = 'Destiny release date';
   destinyDays['2014-12-09'] = 'The Dark Below release date';
   destinyDays['2015-05-19'] = 'House of Wolves release date';
   destinyDays['2015-09-15'] = 'The Taken King release date';
-      
+
   rect.filter(function(d) { return d in destinyDays; })
       .attr("class", function(d) { return "day " + color(days[d]) + " destiny-day"})
     .select("title")
@@ -134,10 +134,10 @@ var characterCallback = function(results, variables) {
   }
   if (json && json.Response && json.Response.data && json.Response.data.activities && json.Response.data.activities.length) {
     activitiesLoaded += json.Response.data.activities.length;
-    console.log('json exists')
+    // console.log('json exists')
     updateStatus('Compiling activity data for ' + username + ' on ' + platform + '. This could take awhile...');
     json.Response.data.activities.forEach(function(activity) {
-      console.log('activity loop')
+      // console.log('activity loop')
       if (activity && activity.period && activity.values.activityDurationSeconds && activity.values.activityDurationSeconds.basic && activity.values.activityDurationSeconds.basic.value) {
         var dateObject = new Date(activity.period);
         var month = dateObject.getMonth() + 1;
@@ -168,8 +168,8 @@ var characterCallback = function(results, variables) {
       if (!charactersChecked[key]) allTrue = false;
     }
     if (allTrue) {
-      console.log(daysPlayed);
-      console.log(dayMax);
+      // console.log(daysPlayed);
+      // console.log(dayMax);
       stopSpinner();
       updateStatus('');
       daysPlayedCallback(daysPlayed, dayMax);
