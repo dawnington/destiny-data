@@ -16,6 +16,7 @@ router.get('/:membershipType/:guardian/fixed', function (req, res) {
 // Courtesy of https://github.com/DestinyTrialsReport/DestinyTrialsReport/blob/05c113f8d39dee2a02461902f0c9e1c287cad3aa/server.js#L37
 router.get('/Platform/*?', function (req, res) {
   res.setTimeout(25000);
+  console.log('req');
   console.log(req);
   var options = {
     url: 'https://www.bungie.net/' + req.originalUrl,
