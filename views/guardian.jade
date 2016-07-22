@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title= 'Days With Destiny'
+    title= 'Destiny Data'
     base(href='/')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(href='https://fonts.googleapis.com/css?family=Averia+Serif+Libre:400,700' rel='stylesheet' type='text/css')
@@ -23,6 +23,7 @@ html
       div(class='columns small-12 scale' id='scale') 0 #[img(src='/public/images/scale.png' class='scale-graphic')] 24 hours
       div(class='columns small-12 fixed-link' id='fixed-link') #[a(id='fixed-link-link') View on fixed scale]
       div(class='columns small-12 calendar')
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js")
+    //- script(src="/public/js/radarChart.js")
     script(src="//d3js.org/d3.v3.min.js")
-    script(src="/public/js/time-counter.js")
-    include ./partials/github.jade
+    script(src="/public/js/kill-counter.js")
