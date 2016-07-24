@@ -1,5 +1,4 @@
 import React from 'react';
-import Chart from './Chart';
 import Legend from './Legend';
 
 const Main = React.createClass({
@@ -13,7 +12,7 @@ const Main = React.createClass({
     return (
       <div className="main">
         <div className="content">
-          <Chart />
+          {this.props.children}
           <Legend {...this.props} />
         </div>
       </div>

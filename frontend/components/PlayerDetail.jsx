@@ -1,5 +1,7 @@
 import React from 'react';
+import { hashHistory } from 'react-router';
 import PlayerActions from '../actions/PlayerActions';
+import PlayerStore from '../stores/PlayerStore';
 import StatsUtil from '../util/StatsUtil';
 
 const PlayerDetail = React.createClass({
@@ -9,6 +11,10 @@ const PlayerDetail = React.createClass({
   },
   removePlayer() {
     PlayerActions.removePlayer(this.props.username);
+    this.checkForEmpty();
+  },
+  checkForEmpty() {
+    if (PlayerStore.count() === 0) { hashHistory.push('/'); }
   },
   render() {
     const player = this.props.player;

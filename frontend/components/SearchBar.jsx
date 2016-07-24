@@ -1,12 +1,14 @@
 import React from 'react';
+import { hashHistory } from 'react-router';
 import PlayerActions from '../actions/PlayerActions';
+import { RadioGroup, Radio } from 'react-radio-group';
 
 const SearchBar = React.createClass({
   getInitialState() {
-    return { username: '', platform: 2 };
+    return { username: '', platform: '2' };
   },
-  onPlatformChange(e) {
-    this.setState({ platform: e.target.value });
+  onPlatformChange(value) {
+    this.setState({ platform: value });
   },
   onUsernameChange(e) {
     this.setState({ username: e.target.value });
@@ -14,18 +16,35 @@ const SearchBar = React.createClass({
   handleSubmit(e) {
     e.preventDefault();
     PlayerActions.addPlayer(this.state.username, this.state.platform);
+    this.checkForRedirect();
     this.setState({ username: '' });
+  },
+  checkForRedirect() {
+    if (this.props.pathname === '/') {
+      hashHistory.push('overall');
+    }
   },
   render() {
     return (
       <div className="search-bar">
         <form className="search-form" onSubmit={this.handleSubmit}>
-          <select name="platform" onChange={this.onPlatformChange}>
-            <option value="2">PS4</option>
-            <option value="1">Xbox</option>
-          </select>
+          <RadioGroup
+            name="platform"
+            selectedValue={this.state.platform}
+            onChange={this.onPlatformChange}
+            className="platform-radio-group"
+          >
+            <label>
+              <Radio value="2" /> PS
+            </label>
+            &nbsp;
+            <label>
+              <Radio value="1" /> XBOX
+            </label>
+          </RadioGroup>
           <input
             type="text"
+            placeholder="Gamertag"
             value={this.state.username}
             onChange={this.onUsernameChange}
           />

@@ -2,6 +2,7 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import PlayerDetail from './PlayerDetail';
 import PlayerStore from '../stores/PlayerStore';
+import ChartOptions from './ChartOptions';
 
 const colors = ['#EDC951', '#CC333F', '#00A0B0'];
 
@@ -23,7 +24,13 @@ const Legend = React.createClass({
     if (this.state.full) {
       return <div></div>;
     }
-    return <SearchBar />;
+    return <SearchBar pathname={this.props.location.pathname} />;
+  },
+  showOptions() {
+    if (PlayerStore.count() > 0) {
+      return <ChartOptions />;
+    }
+    return <div></div>;
   },
   render() {
     const players = this.state.players;
@@ -37,6 +44,7 @@ const Legend = React.createClass({
             )
           }
         </div>
+        {this.showOptions()}
       </div>
     );
   },

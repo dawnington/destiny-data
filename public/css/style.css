@@ -30,6 +30,7 @@ p {
 .content {
   display: flex;
   justify-content: space-around;
+  min-height: 600px;
 }
 
 .intro {
@@ -53,13 +54,19 @@ p {
 .search-form {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding-bottom: 20px;
 }
 
 input {
   border: 1px solid black;
+  padding: 5px;
+}
+
+.platform-radio-group {
+  display: flex;
+  justify-content: space-between;
 }
 
 i {
@@ -78,4 +85,48 @@ i {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.chart-options-group {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.chart-option {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.overall:hover {
+  color: #35d24d;
+}
+
+.primary:hover {
+  color: #68a9df;
+}
+
+.secondary:hover {
+  color: #9f21d2;
+}
+
+.heavy:hover {
+  color: #e6cf3c;
+}
+
+.overall-active {
+  color: #35d24d;
+}
+
+.primary-active {
+  color: #68a9df;
+}
+
+.secondary-active {
+  color: #9f21d2;
+}
+
+.heavy-active {
+  color: #e6cf3c;
 }

@@ -40,6 +40,35 @@ function calculateKillPercentages(player) {
   return data;
 }
 
+function calculatePrimary(player) {
+  const data = [];
+  const total = sumPrimary(player);
+  data.push({ axis: 'Auto Rifle', value: getPercentage(total, player.weaponKillsAutoRifle) });
+  data.push({ axis: 'Pulse Rifle', value: getPercentage(total, player.weaponKillsPulseRifle) });
+  data.push({ axis: 'Scout Rifle', value: getPercentage(total, player.weaponKillsScoutRifle) });
+  data.push({ axis: 'Hand Cannon', value: getPercentage(total, player.weaponKillsHandCannon) });
+  return data;
+}
+
+function calculateSecondary(player) {
+  const data = [];
+  const total = sumSecondary(player);
+  data.push({ axis: 'Fusion Rifle', value: getPercentage(total, player.weaponKillsFusionRifle) });
+  data.push({ axis: 'Shotgun', value: getPercentage(total, player.weaponKillsShotgun) });
+  data.push({ axis: 'Sniper Rifle', value: getPercentage(total, player.weaponKillsSniper) });
+  data.push({ axis: 'Sidearm', value: getPercentage(total, player.weaponKillsSideArm) });
+  return data;
+}
+
+function calculateHeavy(player) {
+  const data = [];
+  const total = sumHeavy(player);
+  data.push({ axis: 'Rocket Launcher', value: getPercentage(total, player.weaponKillsRocketLauncher) });
+  data.push({ axis: 'Machine Gun', value: getPercentage(total, player.weaponKillsMachinegun) });
+  data.push({ axis: 'Sword', value: getPercentage(total, player.weaponKillsSword) });
+  return data;
+}
+
 module.exports = {
   addStats(totalStats, stats) {
     const newStats = {};
@@ -56,6 +85,27 @@ module.exports = {
     const data = [];
     Object.keys(players).forEach(username => {
       data.push(calculateKillPercentages(players[username]));
+    });
+    return data;
+  },
+  primaryStats(players) {
+    const data = [];
+    Object.keys(players).forEach(username => {
+      data.push(calculatePrimary(players[username]));
+    });
+    return data;
+  },
+  secondaryStats(players) {
+    const data = [];
+    Object.keys(players).forEach(username => {
+      data.push(calculateSecondary(players[username]));
+    });
+    return data;
+  },
+  heavyStats(players) {
+    const data = [];
+    Object.keys(players).forEach(username => {
+      data.push(calculateHeavy(players[username]));
     });
     return data;
   },
