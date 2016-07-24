@@ -2,6 +2,7 @@ import React from 'react';
 import { hashHistory } from 'react-router';
 import PlayerActions from '../actions/PlayerActions';
 import { RadioGroup, Radio } from 'react-radio-group';
+import { Button } from 'react-bootstrap';
 
 const SearchBar = React.createClass({
   getInitialState() {
@@ -48,7 +49,7 @@ const SearchBar = React.createClass({
             value={this.state.username}
             onChange={this.onUsernameChange}
           />
-          <button>Search</button>
+          <Button>Search</Button>
         </form>
       </div>
     );
