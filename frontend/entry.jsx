@@ -1,8 +1,7 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import { render } from 'react-dom';
+import Main from './components/Main';
 
-const App = React.createClass({
-  render() {
-    return <div>Hello World</div>;
-  }
-})
+document.addEventListener('DOMContentLoaded', () => {
+  render(<Main />, document.getElementById('root'));
+});

@@ -1,0 +1,80 @@
+body {
+  padding: 50px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  fill: #242424;
+  text-align: center;
+  cursor: default;
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+.label {
+  font-family: 'Raleway', sans-serif;
+  fill: #333333;
+}
+
+.tooltip {
+  fill: #333333;
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-right: 20px;
+}
+
+.chart {
+  flex: 2;
+}
+
+.legend {
+  max-height: 200px;
+  padding: 50px;
+  flex: 1;
+  border: 1px solid lightgrey;
+}
+
+.search-form {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+input {
+  border: 1px solid black;
+}
+
+i {
+  cursor: pointer;
+}
+
+.players {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player-detail {
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

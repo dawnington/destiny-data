@@ -1,8 +1,11 @@
-# Secret Scrubland
-[Live on Heroku](https://secret-scrubland-31430.herokuapp.com/)
+# Destiny Data
 
-A slapdash little web app that displays a heatmap calendar of how much time a Guardian has spent playing Destiny activities.
+[Live on Heroku](https://destiny-data.herokuapp.com/)
 
-Built with Node.js, along with some vanilla JavaScript to power the front end.
+A simple site that uses the Bungie API to fetch and display PvP stats as percentages.
 
-`routes/index.js` expects a [Bungie API Key](https://www.bungie.net/en/User/API). You won't get far without one. 
+Built using React/flux and [D3.js](https://d3js.org/).
+
+Many thanks to [chrisfried](https://github.com/chrisfried/secret-scrubland) for giving me the base to work off of. Check out his app if you haven't already (and if you want to feel bad about how much time you spent on Destiny).
+
+`routes/index.js` requires a [Bungie API Key](https://www.bungie.net/en/User/API)

@@ -33,3 +33,8 @@ node_modules
 .node_repl_history
 
 .env
+
+.eslintrc.js
+
+public/js/bundle.js
+public/js/bundle.js.map
