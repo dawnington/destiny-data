@@ -38,7 +38,7 @@ module.exports = {
         const characterPath = `/Platform/Destiny/Stats/${membershipType}/${membershipId}/${characterId}/?modes=AllPvP&periodType=AllTime`;
         const result = this.bungieRequest(characterPath);
         const stats = (JSON.parse(result.responseText)).Response.allPvP.allTime;
-        totalStats = StatsUtil.addStats(totalStats, stats);
+        if (stats) { totalStats = StatsUtil.addStats(totalStats, stats); }
       });
     }
     return totalStats;

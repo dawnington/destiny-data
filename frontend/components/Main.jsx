@@ -16,7 +16,6 @@ const Main = React.createClass({
           <Chart />
           <Legend {...this.props} />
         </div>
-        <div id="statusText"></div>
       </div>
     );
   },

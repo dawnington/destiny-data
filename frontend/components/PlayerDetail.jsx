@@ -1,10 +1,11 @@
 import React from 'react';
 import PlayerActions from '../actions/PlayerActions';
+import StatsUtil from '../util/StatsUtil';
 
 const PlayerDetail = React.createClass({
   getAverageKD() {
     const player = this.props.player;
-    return (player.killsDeathsRatio / player.characterCount).toFixed(2);
+    return (player.kills / player.deaths).toFixed(2);
   },
   removePlayer() {
     PlayerActions.removePlayer(this.props.username);

@@ -57,16 +57,6 @@ module.exports = {
     Object.keys(players).forEach(username => {
       data.push(calculateKillPercentages(players[username]));
     });
-    // if (data.length === 0) {
-    //   data = [[
-    //     { axis: 'Primary', value: 0 },
-    //     { axis: 'Secondary', value: 0 },
-    //     { axis: 'Heavy', value: 0 },
-    //     { axis: 'Grenade', value: 0 },
-    //     { axis: 'Melee', value: 0 },
-    //     { axis: 'Super', value: 0 },
-    //   ]];
-    // }
     return data;
   },
 };
