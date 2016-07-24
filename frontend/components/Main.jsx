@@ -6,6 +6,9 @@ const Main = React.createClass({
   getInitialState() {
     return { path: window.location.pathname };
   },
+  componentDidMount() {
+    document.getElementById('wrapper').style.display = 'none';
+  },
   render() {
     return (
       <div className="main">
