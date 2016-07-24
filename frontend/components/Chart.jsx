@@ -34,7 +34,8 @@ const Chart = React.createClass({
         </p>
         <p>Use the search bar to find and compare up to three users.</p>
         <p>I'll be working on more features (such as breaking down subcategories), so check back soon!</p>
-        <p>You can fork the repo <a href="https://github.com/dawnington/destiny-data">here</a>. Thanks for stopping by! (ﾉ^ヮ^)ﾉ*:・ﾟ✧</p>
+        <p>You can fork the repo <a href="https://github.com/dawnington/destiny-data">here</a> (it's kind of a mess though).</p>
+        <p>Thanks for stopping by! (ﾉ^ヮ^)ﾉ*:・ﾟ✧</p>
       </div>
     );
   },
