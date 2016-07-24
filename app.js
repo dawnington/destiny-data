@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const routes = require('./routes/index');
+const favicon = require('serve-favicon');
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.set('view engine', 'jade');
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
+app.use(favicon(__dirname + 'public/images/traveler.png'));
 app.use('/', routes);
 
 app.use(function (req, res, next) {
