@@ -36,5 +36,4 @@ node_modules
 
 .eslintrc.js
 
-public/js/bundle.js
-public/js/bundle.js.map
+public/javascript
