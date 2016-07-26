@@ -5,7 +5,7 @@ import ErrorActions from '../actions/ErrorActions';
 import PlayerActions from '../actions/PlayerActions';
 import PlayerStore from '../stores/PlayerStore';
 import { RadioGroup, Radio } from 'react-radio-group';
-import { Button, Form, FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
+import { Button, Form, FormGroup, FormControl, Alert } from 'react-bootstrap';
 
 const SearchBar = React.createClass({
   getInitialState() {
@@ -30,7 +30,7 @@ const SearchBar = React.createClass({
   },
   _onErrorChange() {
     this.setState({ error: ErrorStore.hasError(), isLoading: false });
-    setTimeout(this.clearError, 3000);
+    if (ErrorStore.hasError()) { setTimeout(this.clearError, 3000); }
   },
   clearError() {
     ErrorActions.clearError();
@@ -50,47 +50,60 @@ const SearchBar = React.createClass({
       hashHistory.push('overall');
     }
   },
+  showAlert() {
+    if (this.state.error) {
+      return (
+        <Alert bsStyle="danger">
+          Player not found
+        </Alert>
+      );
+    }
+    return <div></div>;
+  },
   render() {
     const isLoading = this.state.isLoading;
     const disabled = PlayerStore.count() === 3;
     return (
-      <Form inline onSubmit={this.handleSubmit} className="search-form">
-        <FormGroup>
-          <RadioGroup
-            name="platform"
-            selectedValue={this.state.platform}
-            onChange={this.onPlatformChange}
-            className="platform-radio-group"
+      <div>
+        {this.showAlert()}
+        <Form inline onSubmit={this.handleSubmit} className="search-form">
+          <FormGroup>
+            <RadioGroup
+              name="platform"
+              selectedValue={this.state.platform}
+              onChange={this.onPlatformChange}
+              className="platform-radio-group"
+            >
+              <label>
+                <Radio value="2" /> PS
+              </label>
+              {'   '}
+              <label>
+                <Radio value="1" /> XBOX
+              </label>
+            </RadioGroup>
+          </FormGroup>
+          {' '}
+          <FormGroup controlId="formInlineName">
+            <FormControl
+              bsSize="small"
+              type="text"
+              value={this.state.username}
+              placeholder="Enter a username"
+              onChange={this.onUsernameChange}
+              className="username-input"
+            />
+          </FormGroup>
+          {' '}
+          <Button
+            type="submit"
+            disabled={isLoading || disabled}
+            className="search-button"
           >
-            <label>
-              <Radio value="2" /> PS
-            </label>
-            {'   '}
-            <label>
-              <Radio value="1" /> XBOX
-            </label>
-          </RadioGroup>
-        </FormGroup>
-        {' '}
-        <FormGroup controlId="formInlineUsernamer">
-          <FormControl
-            bsSize="small"
-            type="text"
-            value={this.state.username}
-            placeholder="Enter a username"
-            onChange={this.onUsernameChange}
-            className="username-input"
-          />
-        </FormGroup>
-        {' '}
-        <Button
-          type="submit"
-          disabled={isLoading || disabled}
-          className="search-button"
-        >
-          {isLoading ? 'Searching...' : 'Search'}
-        </Button>
-      </Form>
+            {isLoading ? 'Searching...' : 'Search'}
+          </Button>
+        </Form>
+      </div>
     );
   },
 });

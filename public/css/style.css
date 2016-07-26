@@ -1,3 +1,9 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 .jumbotron {
   margin-top: 30px;
   margin-left: 30px;
@@ -10,6 +16,7 @@
 }
 
 .chart {
+  margin-top: 80px;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -17,7 +24,7 @@
 }
 
 .legend {
-  padding: 30px;
+  padding: 80px 30px 30px 30px;
 }
 
 .legend-header {
@@ -26,6 +33,7 @@
   color: white;
   padding: 10px;
   margin-top: 0px;
+  margin-bottom: 20px;
 }
 
 .search-form {
