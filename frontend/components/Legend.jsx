@@ -21,12 +21,6 @@ const Legend = React.createClass({
     const full = (PlayerStore.count() === 3);
     this.setState({ players: PlayerStore.all(), full });
   },
-  showSearch() {
-    if (this.state.full) {
-      return <div></div>;
-    }
-    return <SearchBar pathname={this.props.location.pathname} />;
-  },
   showOptions() {
     if (PlayerStore.count() > 0) {
       return <ChartOptions />;
@@ -37,14 +31,15 @@ const Legend = React.createClass({
     const players = this.state.players;
     return (
       <div className="legend">
-        {this.showSearch()}
-        <div className="players">
+        <SearchBar pathname={this.props.location.pathname} />
+        <Accordion>
           {
-            Object.keys(players).map((username, idx) =>
-              <PlayerDetail username={username} player={players[username]} color={colors[idx]} key={idx} />
-            )
+            Object.keys(players).map((username, idx) => {
+              const header = <PlayerDetail username={username} player={players[username]} color={colors[idx]} key={idx} />;
+              return <Panel header={header} key={idx} />;
+            })
           }
-        </div>
+        </Accordion>
         {this.showOptions()}
       </div>
     );
