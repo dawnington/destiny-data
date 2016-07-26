@@ -28,9 +28,13 @@ function sumHeavy(player) {
   return total;
 }
 
+function totalKills(player) {
+  return sumPrimary(player) + sumSecondary(player) + sumHeavy(player) + player.weaponKillsGrenade + player.weaponKillsMelee + player.weaponKillsSuper;
+}
+
 function calculateKillPercentages(player) {
   const data = [];
-  const total = player.kills;
+  const total = totalKills(player);
   data.push({ axis: 'Primary', value: getPercentage(total, sumPrimary(player)) });
   data.push({ axis: 'Secondary', value: getPercentage(total, sumSecondary(player)) });
   data.push({ axis: 'Heavy', value: getPercentage(total, sumHeavy(player)) });

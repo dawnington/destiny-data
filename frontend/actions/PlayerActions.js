@@ -4,20 +4,7 @@ import PlayerConstants from '../constants/PlayerConstants';
 
 module.exports = {
   addPlayer(username, platform) {
-    const player = {};
-    const searchResult = BungieAPIUtil.searchForPlayer(username, platform);
-    // if (this.checkResults(searchResult)) {
-    //   const characterResults = BungieAPIUtil.fetchCharacterIds(searchResult);
-    //   const characterStats = BungieAPIUtil.fetchCharacterActivity(characterResults);
-    //   player[username] = characterStats;
-    //   player[username].characterCount = (JSON.parse(characterResults.responseText)).Response.data.characters.length;
-    //   Dispatcher.dispatch({
-    //     actionType: PlayerConstants.ADD_PLAYER,
-    //     player,
-    //   });
-    // } else {
-    //   alert('Player not found.');
-    // }
+    BungieAPIUtil.searchForPlayer(username, platform);
   },
   removePlayer(username) {
     Dispatcher.dispatch({

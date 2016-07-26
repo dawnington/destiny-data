@@ -3,6 +3,7 @@ import SearchBar from './SearchBar';
 import PlayerDetail from './PlayerDetail';
 import PlayerStore from '../stores/PlayerStore';
 import ChartOptions from './ChartOptions';
+import { Accordion, Panel } from 'react-bootstrap';
 
 const colors = ['#EDC951', '#CC333F', '#00A0B0'];
 
