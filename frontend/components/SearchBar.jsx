@@ -1,16 +1,23 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
+import ErrorStore from '../stores/ErrorStore';
+import ErrorActions from '../actions/ErrorActions';
 import PlayerActions from '../actions/PlayerActions';
 import PlayerStore from '../stores/PlayerStore';
 import { RadioGroup, Radio } from 'react-radio-group';
-import { Button, Form, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { Button, Form, FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 
 const SearchBar = React.createClass({
   getInitialState() {
-    return { username: '', platform: '2', isLoading: false };
+    return { username: '', platform: '2', isLoading: false, error: false };
   },
   componentDidMount() {
     this.storeListener = PlayerStore.addListener(this._onChange);
+    this.errorListener = ErrorStore.addListener(this._onErrorChange);
+  },
+  componentWillUnmount() {
+    this.storeListener.remove();
+    this.errorListener.remove();
   },
   onPlatformChange(value) {
     this.setState({ platform: value });
@@ -21,11 +28,22 @@ const SearchBar = React.createClass({
   _onChange() {
     this.setState({ isLoading: false });
   },
+  _onErrorChange() {
+    this.setState({ error: ErrorStore.hasError(), isLoading: false });
+    setTimeout(this.clearError, 3000);
+  },
+  clearError() {
+    ErrorActions.clearError();
+  },
   handleSubmit(e) {
     e.preventDefault();
-    PlayerActions.addPlayer(this.state.username, this.state.platform);
-    this.checkForRedirect();
-    this.setState({ username: '', isLoading: true });
+    if (this.state.username === '') {
+      ErrorActions.addError();
+    } else {
+      PlayerActions.addPlayer(this.state.username, this.state.platform);
+      this.checkForRedirect();
+      this.setState({ username: '', isLoading: true });
+    }
   },
   checkForRedirect() {
     if (this.props.pathname === '/') {
@@ -36,7 +54,7 @@ const SearchBar = React.createClass({
     const isLoading = this.state.isLoading;
     const disabled = PlayerStore.count() === 3;
     return (
-      <Form inline onSubmit={this.handleSubmit}>
+      <Form inline onSubmit={this.handleSubmit} className="search-form">
         <FormGroup>
           <RadioGroup
             name="platform"
@@ -54,19 +72,21 @@ const SearchBar = React.createClass({
           </RadioGroup>
         </FormGroup>
         {' '}
-        <FormGroup controlId="formInlineName">
+        <FormGroup controlId="formInlineUsernamer">
           <FormControl
             bsSize="small"
             type="text"
             value={this.state.username}
             placeholder="Enter a username"
             onChange={this.onUsernameChange}
+            className="username-input"
           />
         </FormGroup>
         {' '}
         <Button
           type="submit"
           disabled={isLoading || disabled}
+          className="search-button"
         >
           {isLoading ? 'Searching...' : 'Search'}
         </Button>

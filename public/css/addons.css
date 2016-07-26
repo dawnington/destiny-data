@@ -1,5 +1,65 @@
-li {
-  list-style: none;
+.jumbotron {
+  margin-top: 30px;
+  margin-left: 30px;
+  padding: 20px;
+  background-color: white;
+}
+
+.jumbotron > p {
+  font-size: 20px;
+}
+
+.chart {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  min-height: 700px;
+}
+
+.legend {
+  padding: 30px;
+}
+
+.legend-header {
+  background-color: #2a324e;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  margin-top: 0px;
+}
+
+.search-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.platform-radio-group {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.platform-radio-group > label {
+  margin-right: 10px;
+  margin-bottom: 0;
+  font-weight: normal;
+}
+
+.username-input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.search-button {
+  flex: 1;
+}
+
+.players {
+  margin: 10px;
+  padding: 10px;
 }
 
 .player-detail {
@@ -7,4 +67,69 @@ li {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.fa.fa-stop {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.detail-username {
+  flex: 2;
+}
+
+.detailKD {
+  flex: 2;
+}
+
+.fa.fa-times {
+  flex: 1;
+  cursor: pointer;
+  text-align: right;
+}
+
+.chart-options-group {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+li {
+  list-style: none;
+}
+
+.chart-options-group {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.chart-option {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.chart-option:hover {
+  text-decoration: none;
+}
+
+.overall:hover, .overall-active, .overall-active:focus {
+  color: #35d24d;
+  text-decoration: none;
+}
+
+.primary:hover, .primary-active, .primary-active:focus {
+  color: #68a9df;
+  text-decoration: none;
+}
+
+.secondary:hover, .secondary-active, .secondary-active:focus {
+  color: #9f21d2;
+  text-decoration: none;
+}
+
+.heavy:hover, .heavy-active, .heavy-active:focus {
+  color: #e6cf3c;
+  text-decoration: none;
 }

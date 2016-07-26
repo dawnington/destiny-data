@@ -28,8 +28,16 @@ function sumHeavy(player) {
   return total;
 }
 
+function sumSuper(player) {
+  let total = 0;
+  PlayerConstants.SUPER.forEach(weapon => {
+    total += player[weapon];
+  });
+  return total;
+}
+
 function totalKills(player) {
-  return sumPrimary(player) + sumSecondary(player) + sumHeavy(player) + player.weaponKillsGrenade + player.weaponKillsMelee + player.weaponKillsSuper;
+  return sumPrimary(player) + sumSecondary(player) + sumHeavy(player) + sumSuper(player) + player.weaponKillsGrenade + player.weaponKillsMelee;
 }
 
 function calculateKillPercentages(player) {
@@ -40,7 +48,7 @@ function calculateKillPercentages(player) {
   data.push({ axis: 'Heavy', value: getPercentage(total, sumHeavy(player)) });
   data.push({ axis: 'Grenade', value: getPercentage(total, player.weaponKillsGrenade) });
   data.push({ axis: 'Melee', value: getPercentage(total, player.weaponKillsMelee) });
-  data.push({ axis: 'Super', value: getPercentage(total, player.weaponKillsSuper) });
+  data.push({ axis: 'Super', value: getPercentage(total, sumSuper(player)) });
   return data;
 }
 

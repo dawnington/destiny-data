@@ -21,8 +21,8 @@ const PlayerDetail = React.createClass({
     return (
       <div className="player-detail">
         <i className="fa fa-stop" style={{color: this.props.color}}></i>
-          <li>{this.props.username}</li>
-          <li>Average K/D: {this.getAverageKD()}</li>
+          <li className="detail-username">{this.props.username}</li>
+          <li className="detailKD">Average K/D: {this.getAverageKD()}</li>
         <i className="fa fa-times" onClick={this.removePlayer}></i>
       </div>
     );

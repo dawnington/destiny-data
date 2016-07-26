@@ -1,4 +1,5 @@
 import Dispatcher from '../dispatcher/Dispatcher';
+import ErrorConstants from '../constants/ErrorConstants';
 import PlayerConstants from '../constants/PlayerConstants';
 import StatsUtil from './StatsUtil';
 
@@ -52,10 +53,16 @@ function fetchCharacterActivity(json) {
 }
 
 function fetchCharacterIds(json) {
-  const membershipId = json.Response[0].membershipId;
-  const membershipType = json.Response[0].membershipType;
-  const accountPath = `/Platform/Destiny/${membershipType}/Account/${membershipId}/Summary/`;
-  return bungieRequest(accountPath, fetchCharacterActivity);
+  if (json.Response.length === 0) {
+    Dispatcher.dispatch({
+      actionType: ErrorConstants.PLAYER_NOT_FOUND,
+    });
+  } else {
+    const membershipId = json.Response[0].membershipId;
+    const membershipType = json.Response[0].membershipType;
+    const accountPath = `/Platform/Destiny/${membershipType}/Account/${membershipId}/Summary/`;
+    bungieRequest(accountPath, fetchCharacterActivity);
+  }
 }
 
 module.exports = {
@@ -64,6 +71,6 @@ module.exports = {
     totalStats = {};
     username = gamertag;
     const searchPath = `/Platform/Destiny/SearchDestinyPlayer/${platform}/${username}`;
-    return bungieRequest(searchPath, fetchCharacterIds);
+    bungieRequest(searchPath, fetchCharacterIds);
   },
 };

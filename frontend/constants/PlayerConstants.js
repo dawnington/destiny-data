@@ -18,4 +18,8 @@ module.exports = {
     'weaponKillsMachinegun',
     'weaponKillsSword',
   ],
+  SUPER: [
+    'weaponKillsSuper',
+    'weaponKillsRelic',
+  ],
 };

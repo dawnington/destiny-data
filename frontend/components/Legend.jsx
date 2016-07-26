@@ -31,8 +31,9 @@ const Legend = React.createClass({
     const players = this.state.players;
     return (
       <div className="legend">
+        <h3 className="legend-header">Destiny Data</h3>
         <SearchBar pathname={this.props.location.pathname} />
-        <Accordion>
+        <Accordion className="players">
           {
             Object.keys(players).map((username, idx) => {
               const header = <PlayerDetail username={username} player={players[username]} color={colors[idx]} key={idx} />;
