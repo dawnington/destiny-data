@@ -2,7 +2,7 @@ import React from 'react';
 import { hashHistory } from 'react-router';
 import PlayerActions from '../actions/PlayerActions';
 import { RadioGroup, Radio } from 'react-radio-group';
-import { Button } from 'react-bootstrap';
+import { Button, Form, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 const SearchBar = React.createClass({
   getInitialState() {
@@ -27,8 +27,8 @@ const SearchBar = React.createClass({
   },
   render() {
     return (
-      <div className="search-bar">
-        <form className="search-form" onSubmit={this.handleSubmit}>
+      <Form inline onSubmit={this.handleSubmit}>
+        <FormGroup>
           <RadioGroup
             name="platform"
             selectedValue={this.state.platform}
@@ -38,20 +38,25 @@ const SearchBar = React.createClass({
             <label>
               <Radio value="2" /> PS
             </label>
-            &nbsp;
+            {'   '}
             <label>
               <Radio value="1" /> XBOX
             </label>
           </RadioGroup>
-          <input
+        </FormGroup>
+        {' '}
+        <FormGroup controlId="formInlineName">
+          <FormControl
+            bsSize="small"
             type="text"
-            placeholder="Gamertag"
             value={this.state.username}
+            placeholder="Enter a username"
             onChange={this.onUsernameChange}
           />
-          <Button>Search</Button>
-        </form>
-      </div>
+        </FormGroup>
+        {' '}
+        <Button type="submit">Search</Button>
+      </Form>
     );
   },
 });

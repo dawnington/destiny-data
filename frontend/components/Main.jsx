@@ -1,5 +1,6 @@
 import React from 'react';
 import Legend from './Legend';
+import { Col } from 'react-bootstrap';
 
 const Main = React.createClass({
   getInitialState() {
@@ -11,10 +12,12 @@ const Main = React.createClass({
   render() {
     return (
       <div className="main">
-        <div className="content">
+        <Col className="content" xs={12} md={8}>
           {this.props.children}
+        </Col>
+        <Col xs={6} md={4}>
           <Legend {...this.props} />
-        </div>
+        </Col>
       </div>
     );
   },

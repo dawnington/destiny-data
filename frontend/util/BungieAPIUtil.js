@@ -1,46 +1,69 @@
+import Dispatcher from '../dispatcher/Dispatcher';
+import PlayerConstants from '../constants/PlayerConstants';
 import StatsUtil from './StatsUtil';
 
-module.exports = {
-  bungieRequest(url) {
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        // const json = JSON.parse(xhr.responseText);
-        // console.log(json);
-      } else if (xhr.readyState === 4) {
-        console.log('Something went wrong');
-      }
-    };
-    xhr.open('GET', url, false);
-    xhr.send();
-    return xhr;
-  },
-  searchForPlayer(username, platform) {
-    const searchPath = `/Platform/Destiny/SearchDestinyPlayer/${platform}/${username}`;
-    return this.bungieRequest(searchPath);
-  },
-  fetchCharacterIds(xhr) {
-    const json = JSON.parse(xhr.responseText);
-    const membershipId = json.Response[0].membershipId;
-    const membershipType = json.Response[0].membershipType;
-    const accountPath = `/Platform/Destiny/${membershipType}/Account/${membershipId}/Summary/`;
-    return this.bungieRequest(accountPath);
-  },
-  fetchCharacterActivity(xhr) {
-    const json = JSON.parse(xhr.responseText);
-    const characters = json.Response.data.characters;
-    const membershipId = json.Response.data.membershipId;
-    const membershipType = json.Response.data.membershipType;
-    let totalStats = {};
-    if (json && characters) {
-      characters.forEach(character => {
-        const characterId = character.characterBase.characterId;
-        const characterPath = `/Platform/Destiny/Stats/${membershipType}/${membershipId}/${characterId}/?modes=AllPvP&periodType=AllTime`;
-        const result = this.bungieRequest(characterPath);
-        const stats = (JSON.parse(result.responseText)).Response.allPvP.allTime;
-        if (stats) { totalStats = StatsUtil.addStats(totalStats, stats); }
-      });
+let player = {};
+let totalStats = {};
+let username = '';
+let characterCount = 0;
+let charactersChecked = 0;
+
+function bungieRequest(url, callback, variables) {
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      const json = JSON.parse(xhr.responseText);
+      callback(json, variables);
+    } else if (xhr.readyState === 4) {
+      console.log('Something went wrong');
     }
-    return totalStats;
+  };
+  xhr.open('GET', url, true);
+  xhr.send();
+}
+
+function addCharacterStats(json) {
+  const stats = json.Response.allPvP.allTime;
+  if (stats) { totalStats = StatsUtil.addStats(totalStats, stats); }
+  charactersChecked += 1;
+  if (charactersChecked === characterCount) {
+    player[username] = totalStats;
+    player[username].characterCount = characterCount;
+    Dispatcher.dispatch({
+      actionType: PlayerConstants.ADD_PLAYER,
+      player,
+    });
+  }
+}
+
+function fetchCharacterActivity(json) {
+  charactersChecked = 0;
+  characterCount = json.Response.data.characters.length;
+  const characters = json.Response.data.characters;
+  const membershipId = json.Response.data.membershipId;
+  const membershipType = json.Response.data.membershipType;
+  if (json && characters) {
+    characters.forEach(character => {
+      const characterId = character.characterBase.characterId;
+      const characterPath = `/Platform/Destiny/Stats/${membershipType}/${membershipId}/${characterId}/?modes=AllPvP&periodType=AllTime`;
+      bungieRequest(characterPath, addCharacterStats);
+    });
+  }
+}
+
+function fetchCharacterIds(json) {
+  const membershipId = json.Response[0].membershipId;
+  const membershipType = json.Response[0].membershipType;
+  const accountPath = `/Platform/Destiny/${membershipType}/Account/${membershipId}/Summary/`;
+  return bungieRequest(accountPath, fetchCharacterActivity);
+}
+
+module.exports = {
+  searchForPlayer(gamertag, platform) {
+    player = {};
+    totalStats = {};
+    username = gamertag;
+    const searchPath = `/Platform/Destiny/SearchDestinyPlayer/${platform}/${username}`;
+    return bungieRequest(searchPath, fetchCharacterIds);
   },
 };
