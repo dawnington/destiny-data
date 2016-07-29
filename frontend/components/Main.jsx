@@ -12,11 +12,11 @@ const Main = React.createClass({
   render() {
     return (
       <div className="main">
-        <Col className="content" xs={12} md={7}>
-          {this.props.children}
-        </Col>
-        <Col xs={12} md={5}>
+        <Col xs={12} md={5} mdPush={7}>
           <Legend {...this.props} />
+        </Col>
+        <Col className="content" xs={12} md={7} mdPull={5}>
+          {this.props.children}
         </Col>
       </div>
     );
