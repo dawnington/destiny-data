@@ -141,3 +141,20 @@ li {
   color: #e6cf3c;
   text-decoration: none;
 }
+
+@media (max-width: 991px) {
+  .chart {
+    margin-top: 0;
+  }
+
+  .legend {
+    padding: 20px 0;
+  }
+
+  .username-input {
+    width: auto;
+  }
+  .form-group {
+    margin-bottom: 0;
+  }
+}
