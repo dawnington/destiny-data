@@ -38,7 +38,6 @@ function addCharacterStats(json) {
 }
 
 function fetchCharacterActivity(json) {
-  charactersChecked = 0;
   characterCount = json.Response.data.characters.length;
   const characters = json.Response.data.characters;
   const membershipId = json.Response.data.membershipId;
@@ -65,11 +64,16 @@ function fetchCharacterIds(json) {
   }
 }
 
+function resetData(gamertag) {
+  player = {};
+  totalStats = {};
+  charactersChecked = 0;
+  username = gamertag;
+}
+
 module.exports = {
   searchForPlayer(gamertag, platform) {
-    player = {};
-    totalStats = {};
-    username = gamertag;
+    resetData(gamertag);
     const searchPath = `/Platform/Destiny/SearchDestinyPlayer/${platform}/${username}`;
     bungieRequest(searchPath, fetchCharacterIds);
   },
