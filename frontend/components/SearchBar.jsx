@@ -60,6 +60,15 @@ const SearchBar = React.createClass({
     }
     return <div></div>;
   },
+  buttonText() {
+    if (PlayerStore.count() === 3) {
+      return 'Full';
+    } else if (this.state.isLoading) {
+      return 'Searching...';
+    } else {
+      return 'Add Player';
+    }
+  },
   render() {
     const isLoading = this.state.isLoading;
     const disabled = PlayerStore.count() === 3;
@@ -100,7 +109,7 @@ const SearchBar = React.createClass({
             disabled={isLoading || disabled}
             className="search-button"
           >
-            {isLoading ? 'Searching...' : 'Search'}
+            {this.buttonText()}
           </Button>
         </Form>
       </div>
