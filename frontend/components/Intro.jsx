@@ -12,7 +12,7 @@ const Intro = React.createClass({
         <p>Use the search bar to find and compare up to three users.</p>
         <p>You can fork the repo <a href="https://github.com/dawnington/destiny-data">here</a>.</p>
         <p>If you want to carry me through Trials, my PSN is dawnington.</p>
-        <p>If you want to hire me, here's my <a href="https://www.linkedin.com/in/dawnington">LinkedIn</a>.</p>
+        <p>If you want to hire me, you can find out more about me <a href="https://dawnington.github.io/">here</a>.</p>
         <p>Thanks for stopping by! (ﾉ^ヮ^)ﾉ*:・ﾟ✧</p>
       </Jumbotron>
     );
