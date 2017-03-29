@@ -19,6 +19,10 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+li {
+  list-style: none;
+}
+
 body {
   font-family: 'Titillium Web', sans-serif;
   background-color: #1f1e26;
@@ -50,83 +54,13 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.players {
-  margin: 10px;
-  padding: 10px;
-}
-
-.player-detail {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.fa.fa-stop {
-  flex: 1;
-  margin-right: 10px;
-}
-
-.detail-username {
-  flex: 2;
-}
-
-.detailKD {
-  flex: 2;
-}
-
-.fa.fa-times {
-  flex: 1;
-  cursor: pointer;
-  text-align: right;
-}
-
-.chart-options-group {
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-}
-
-li {
-  list-style: none;
+	flex-wrap: wrap;
 }
 
 .chart-options-group {
   display: flex;
-  width: 100%;
   justify-content: space-between;
-}
-
-.chart-option {
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-}
-
-.chart-option:hover {
-  text-decoration: none;
-}
-
-.overall:hover, .overall-active, .overall-active:focus {
-  color: #35d24d;
-  text-decoration: none;
-}
-
-.primary:hover, .primary-active, .primary-active:focus {
-  color: #68a9df;
-  text-decoration: none;
-}
-
-.secondary:hover, .secondary-active, .secondary-active:focus {
-  color: #9f21d2;
-  text-decoration: none;
-}
-
-.heavy:hover, .heavy-active, .heavy-active:focus {
-  color: #e6cf3c;
-  text-decoration: none;
+	flex-wrap: wrap;
 }
 
 @media (max-width: 991px) {
@@ -144,4 +78,8 @@ li {
   .form-group {
     margin-bottom: 0;
   }
+
+	button {
+		width: 100%;
+	}
 }

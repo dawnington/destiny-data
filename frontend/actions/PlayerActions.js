@@ -21,4 +21,10 @@ module.exports = {
     const json = JSON.parse(resp.responseText);
     return (json.Response.length > 0);
   },
+  changeFilter(filter) {
+    Dispatcher.dispatch({
+      actionType: 'CHANGE_FILTER',
+      filter,
+    });
+  },
 };

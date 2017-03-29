@@ -1,5 +1,4 @@
 import React from 'react';
-import { hashHistory } from 'react-router';
 import ErrorStore from '../stores/ErrorStore';
 import ErrorActions from '../actions/ErrorActions';
 import PlayerActions from '../actions/PlayerActions';
@@ -77,13 +76,7 @@ const SearchBar = React.createClass({
       ErrorActions.addError();
     } else {
       PlayerActions.addPlayer(this.state.username, this.state.platform);
-      this.checkForRedirect();
       this.setState({ username: '', isLoading: true });
-    }
-  },
-  checkForRedirect() {
-    if (this.props.pathname === '/') {
-      hashHistory.push('overall');
     }
   },
   showAlert() {

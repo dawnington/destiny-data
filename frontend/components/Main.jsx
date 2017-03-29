@@ -4,11 +4,11 @@ import { Col } from 'react-bootstrap';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import StatsChart from './StatsChart';
+import PlayerStore from '../stores/PlayerStore';
+import Intro from './Intro';
 
 const Main = React.createClass({
-  getInitialState() {
-    return { path: window.location.pathname };
-  },
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
@@ -17,7 +17,7 @@ const Main = React.createClass({
             <Legend {...this.props} />
           </Col>
           <Col className="content" xs={12} md={7}>
-            {this.props.children}
+            <StatsChart />
           </Col>
         </div>
       </MuiThemeProvider>

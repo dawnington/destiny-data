@@ -3,6 +3,7 @@ import { Store } from 'flux/utils';
 import PlayerConstants from '../constants/PlayerConstants';
 
 let _players = {};
+let currentFilter = 'overall';
 
 const PlayerStore = new Store(Dispatcher);
 
@@ -21,6 +22,11 @@ function removePlayer(username) {
   PlayerStore.__emitChange();
 }
 
+function changeFilter(filter) {
+  currentFilter = filter;
+  PlayerStore.__emitChange();
+}
+
 PlayerStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case PlayerConstants.CLEAR_PLAYERS:
@@ -31,6 +37,9 @@ PlayerStore.__onDispatch = function (payload) {
       break;
     case PlayerConstants.REMOVE_PLAYER:
       removePlayer(payload.username);
+      break;
+    case 'CHANGE_FILTER':
+      changeFilter(payload.filter);
       break;
     default:
       break;
@@ -43,6 +52,10 @@ PlayerStore.all = function () {
 
 PlayerStore.count = function () {
   return (Object.keys(_players)).length;
+};
+
+PlayerStore.filter = function () {
+  return currentFilter;
 };
 
 export default PlayerStore;

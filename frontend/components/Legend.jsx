@@ -4,7 +4,6 @@ import PlayerActions from '../actions/PlayerActions';
 import PlayerStore from '../stores/PlayerStore';
 import ChartOptions from './ChartOptions';
 import ContentClear from 'material-ui/svg-icons/content/clear';
-import { hashHistory } from 'react-router';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
 const colors = ['#EDC951', '#CC333F', '#00A0B0'];
@@ -50,14 +49,11 @@ const Legend = React.createClass({
     PlayerActions.removePlayer(username);
     this.checkForEmpty();
   },
-  checkForEmpty() {
-    if (PlayerStore.count() === 0) { hashHistory.push('/'); }
-  },
   render() {
     const players = this.state.players;
     return (
       <div className="legend">
-        <SearchBar pathname={this.props.location.pathname} />
+        <SearchBar />
         <Table
           style={styles.table}
           selectable={false}
