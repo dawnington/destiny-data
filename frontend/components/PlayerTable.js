@@ -47,7 +47,6 @@ const PlayerTable = React.createClass({
   },
   removePlayer(username) {
     PlayerActions.removePlayer(username);
-    this.checkForEmpty();
   },
   render() {
     const players = this.state.players;
