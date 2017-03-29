@@ -4,7 +4,13 @@ import PlayerActions from '../actions/PlayerActions';
 import PlayerStore from '../stores/PlayerStore';
 import ChartOptions from './ChartOptions';
 import ContentClear from 'material-ui/svg-icons/content/clear';
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn } from 'material-ui/Table';
 
 const colors = ['#EDC951', '#CC333F', '#00A0B0'];
 
