@@ -1,25 +1,25 @@
-const chart = document.getElementsByClassName('chart')[0];
-const margin = { top: 100, right: 50, bottom: 100, left: 50 };
-// const width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right;
-// const height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
-const width = Math.min(700, chart.offsetWidth - 10) - margin.left - margin.right;
-const height = Math.min(width, chart.offsetHeight - margin.top - margin.bottom - 20);
-
-const color = d3.scale.ordinal()
-	.range(['#EDC951', '#CC333F', '#00A0B0']);
-
-const options = {
-  w: width,
-  h: height,
-  margin,
-  maxValue: 0.5,
-  levels: 5,
-  roundStrokes: true,
-  color,
-};
-
 module.exports = {
 	drawChart(id, data) {
+		const chart = document.getElementsByClassName('chart')[0];
+		const margin = { top: 100, right: 50, bottom: 100, left: 50 };
+		// const width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right;
+		// const height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+		const width = Math.min(700, chart.offsetWidth - 10) - margin.left - margin.right;
+		const height = Math.min(width, chart.offsetHeight - margin.top - margin.bottom - 20);
+
+		const color = d3.scale.ordinal()
+			.range(['#EDC951', '#CC333F', '#00A0B0']);
+
+		const options = {
+			w: width,
+			h: height,
+			margin,
+			maxValue: 0.5,
+			levels: 5,
+			roundStrokes: true,
+			color,
+		};
+
 		const cfg = {
 	  	w: 600, // Width of the circle
 	    h: 600,	// Height of the circle

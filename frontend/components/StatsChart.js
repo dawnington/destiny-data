@@ -8,6 +8,7 @@ const StatsChart = React.createClass({
   },
   componentDidMount() {
     this.storeListener = PlayerStore.addListener(this._onChange);
+    window.addEventListener('resize', this.componentDidUpdate.bind(this));
     this.renderChart(PlayerStore.all());
   },
   componentDidUpdate() {
@@ -15,6 +16,7 @@ const StatsChart = React.createClass({
   },
   componentWillUnmount() {
     this.storeListener.remove();
+    window.removeEventListener('resize', this.updateDimensions);
   },
   _onChange() {
     this.setState({ filter: PlayerStore.filter() });
