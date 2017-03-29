@@ -1,11 +1,27 @@
 import React from 'react';
 import SearchBar from './SearchBar';
-import PlayerDetail from './PlayerDetail';
+import PlayerActions from '../actions/PlayerActions';
 import PlayerStore from '../stores/PlayerStore';
 import ChartOptions from './ChartOptions';
-import { Accordion, Panel } from 'react-bootstrap';
+import ContentClear from 'material-ui/svg-icons/content/clear';
+import { hashHistory } from 'react-router';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
 const colors = ['#EDC951', '#CC333F', '#00A0B0'];
+
+const styles = {
+  table: {
+    backgroundColor: '#1f1e26',
+    fontFamily: 'inherit',
+  },
+  rowColumn: {
+    color: '#f0f0f1',
+  },
+  iconColumn: {
+    width: '50px',
+    paddingLeft: '0px',
+  },
+};
 
 const Legend = React.createClass({
   getInitialState() {
@@ -27,19 +43,57 @@ const Legend = React.createClass({
     }
     return <div></div>;
   },
+  getAverageKD(player) {
+    return (player.kills / player.deaths).toFixed(2);
+  },
+  removePlayer(username) {
+    PlayerActions.removePlayer(username);
+    this.checkForEmpty();
+  },
+  checkForEmpty() {
+    if (PlayerStore.count() === 0) { hashHistory.push('/'); }
+  },
   render() {
     const players = this.state.players;
     return (
       <div className="legend">
         <SearchBar pathname={this.props.location.pathname} />
-        <Accordion className="players">
-          {
-            Object.keys(players).map((username, idx) => {
-              const header = <PlayerDetail username={username} player={players[username]} color={colors[idx]} key={idx} />;
-              return <Panel header={header} key={idx} />;
-            })
-          }
-        </Accordion>
+        <Table
+          style={styles.table}
+          selectable={false}
+        >
+          <TableHeader
+            adjustForCheckbox={false}
+            displaySelectAll={false}
+          >
+            <TableRow>
+              <TableHeaderColumn style={styles.rowColumn}>Username</TableHeaderColumn>
+              <TableHeaderColumn style={styles.rowColumn}>Average K/D</TableHeaderColumn>
+              <TableHeaderColumn style={styles.iconColumn} />
+            </TableRow>
+          </TableHeader>
+          <TableBody displayRowCheckbox={false}>
+            {
+              Object.keys(players).map((username, idx) => {
+                return (
+                  <TableRow
+                    style={{ color: colors[idx] }}
+                    key={idx}
+                  >
+                    <TableRowColumn>{username}</TableRowColumn>
+                    <TableRowColumn>{this.getAverageKD(players[username])}</TableRowColumn>
+                    <TableRowColumn style={styles.iconColumn}>
+                      <ContentClear
+                        onClick={() => this.removePlayer(username)}
+                        style={{ cursor: 'pointer' }}
+                      />
+                    </TableRowColumn>
+                  </TableRow>
+                );
+              })
+             }
+          </TableBody>
+        </Table>
         {this.showOptions()}
       </div>
     );
