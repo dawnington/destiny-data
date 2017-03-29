@@ -31,7 +31,6 @@ const Legend = React.createClass({
     const players = this.state.players;
     return (
       <div className="legend">
-        <h3 className="legend-header">Destiny Data</h3>
         <SearchBar pathname={this.props.location.pathname} />
         <Accordion className="players">
           {

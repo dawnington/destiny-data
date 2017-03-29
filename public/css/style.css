@@ -1,68 +1,54 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
+  background-color: #1f1e26;
+  color: #f0f0f1;
+  margin: 50px;
 }
 
-.jumbotron {
-  margin-top: 30px;
-  margin-left: 30px;
-  padding: 20px;
-  background-color: white;
-}
-
-.jumbotron > p {
-  font-size: 20px;
+h1 {
+  font-size: 50px;
 }
 
 .chart {
-  margin-top: 80px;
   display: flex;
   align-content: center;
   justify-content: center;
   min-height: 700px;
 }
 
-.legend {
-  padding: 80px 30px 30px 30px;
+.chart-label {
+	fill: #f0f0f1;
 }
 
-.legend-header {
-  background-color: #2a324e;
-  border-radius: 5px;
-  color: white;
-  padding: 10px;
-  margin-top: 0px;
-  margin-bottom: 20px;
+.legend {
+  margin-top: 20px;
 }
 
 .search-form {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-.platform-radio-group {
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-}
-
-.platform-radio-group > label {
-  margin-right: 10px;
-  margin-bottom: 0;
-  font-weight: normal;
-}
-
-.username-input {
-  flex: 1;
-  margin-right: 10px;
-}
-
-.search-button {
-  flex: 1;
 }
 
 .players {

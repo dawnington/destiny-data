@@ -114,7 +114,7 @@ module.exports = {
 		   .attr("y", function(d){return -d*radius/cfg.levels;})
 		   .attr("dy", "0.4em")
 		   .style("font-size", "10px")
-		   .attr("fill", "#737373")
+		   .attr("fill", "#a4a1a1")
 		   .text(function(d,i) { return Format(maxValue * d/cfg.levels); });
 
 		/////////////////////////////////////////////////////////
@@ -139,7 +139,7 @@ module.exports = {
 
 		//Append the labels at each axis
 		axis.append("text")
-			.attr("class", "label")
+			.attr("class", "chart-label")
 			.style("font-size", "11px")
 			.attr("text-anchor", "middle")
 			.attr("dy", "0.35em")

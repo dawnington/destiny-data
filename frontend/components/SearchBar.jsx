@@ -4,8 +4,42 @@ import ErrorStore from '../stores/ErrorStore';
 import ErrorActions from '../actions/ErrorActions';
 import PlayerActions from '../actions/PlayerActions';
 import PlayerStore from '../stores/PlayerStore';
-import { RadioGroup, Radio } from 'react-radio-group';
-import { Button, Form, FormGroup, FormControl, Alert } from 'react-bootstrap';
+import { Form, Alert } from 'react-bootstrap';
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import Toggle from 'material-ui/Toggle';
+
+const styles = {
+  hint: {
+    color: '#9c9797',
+    fontFamily: 'Titillium Web',
+  },
+  button: {
+    fontFamily: 'Titillium Web',
+    backgroundColor: '#00bcd4',
+    borderRadius: '5px',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+  },
+  toggle: {
+    width: '20%',
+  },
+  toggleLabel: {
+    fontFamily: 'Titillium Web',
+  },
+  thumbStyle: {
+    backgroundColor: '#00bcd4',
+  },
+  thumbSwitchedStyle: {
+    backgroundColor: '#0dcb3d',
+  },
+  trackStyle: {
+    backgroundColor: 'rgba(0, 151, 167, 0.498039)',
+  },
+  trackSwitchedStyle: {
+    backgroundColor: 'rgba(13, 203, 61, 0.49)',
+  },
+};
 
 const SearchBar = React.createClass({
   getInitialState() {
@@ -19,8 +53,10 @@ const SearchBar = React.createClass({
     this.storeListener.remove();
     this.errorListener.remove();
   },
-  onPlatformChange(value) {
-    this.setState({ platform: value });
+  onPlatformChange() {
+    const oldPlatform = this.state.platform;
+    const newPlatform = oldPlatform === '1' ? '2' : '1';
+    this.setState({ platform: newPlatform });
   },
   onUsernameChange(e) {
     this.setState({ username: e.target.value });
@@ -65,9 +101,20 @@ const SearchBar = React.createClass({
       return 'Full';
     } else if (this.state.isLoading) {
       return 'Searching...';
-    } else {
-      return 'Add Player';
     }
+    return 'Add Player';
+  },
+  toggleText() {
+    if (this.state.platform === '2') {
+      return 'PS4';
+    }
+    return 'XBOX';
+  },
+  toggleColor() {
+    if (this.state.platform === '2') {
+      return '#00bcd4';
+    }
+    return '#0dcb3d';
   },
   render() {
     const isLoading = this.state.isLoading;
@@ -76,41 +123,29 @@ const SearchBar = React.createClass({
       <div>
         {this.showAlert()}
         <Form inline onSubmit={this.handleSubmit} className="search-form">
-          <FormGroup>
-            <RadioGroup
-              name="platform"
-              selectedValue={this.state.platform}
-              onChange={this.onPlatformChange}
-              className="platform-radio-group"
-            >
-              <label>
-                <Radio value="2" /> PS
-              </label>
-              {'   '}
-              <label>
-                <Radio value="1" /> XBOX
-              </label>
-            </RadioGroup>
-          </FormGroup>
-          {' '}
-          <FormGroup controlId="formInlineName">
-            <FormControl
-              bsSize="small"
-              type="text"
-              value={this.state.username}
-              placeholder="Enter a username"
-              onChange={this.onUsernameChange}
-              className="username-input"
-            />
-          </FormGroup>
-          {' '}
-          <Button
+          <Toggle
+            label={this.toggleText()}
+            style={styles.toggle}
+            onToggle={this.onPlatformChange}
+            labelStyle={styles.toggleLabel}
+            thumbStyle={styles.thumbStyle}
+            thumbSwitchedStyle={styles.thumbSwitchedStyle}
+            trackStyle={styles.trackStyle}
+            trackSwitchedStyle={styles.trackSwitchedStyle}
+          />
+          <TextField
+            hintText="Username (e.g. DeeJ_BNG)"
+            hintStyle={styles.hint}
+            value={this.state.username}
+            onChange={this.onUsernameChange}
+          />
+          <FlatButton
             type="submit"
             disabled={isLoading || disabled}
-            className="search-button"
+            style={styles.button}
           >
             {this.buttonText()}
-          </Button>
+          </FlatButton>
         </Form>
       </div>
     );
