@@ -6,6 +6,7 @@ import PlayerStore from '../stores/PlayerStore';
 const style = {
   fontFamily: 'Titillium Web',
   borderRadius: '5px',
+  fontSize: '14px',
 };
 
 const ChartOptions = React.createClass({
@@ -44,33 +45,37 @@ const ChartOptions = React.createClass({
     return (
       <div className="chart-options-group">
         <FlatButton
-          label="Overall"
           onClick={() => this.changeFilter('overall')}
           style={style}
           hoverColor="#913734"
           backgroundColor={this.activeButton('overall')}
-        />
+        >
+          OVERALL
+        </FlatButton>
         <FlatButton
-          label="Primary"
           onClick={() => this.changeFilter('primary')}
           style={style}
           hoverColor="#5785a2"
           backgroundColor={this.activeButton('primary')}
-        />
+        >
+          PRIMARY
+        </FlatButton>
         <FlatButton
-          label="Secondary"
           onClick={() => this.changeFilter('secondary')}
           style={style}
           hoverColor="#58477e"
           backgroundColor={this.activeButton('secondary')}
-        />
+        >
+          SECONDARY
+        </FlatButton>
         <FlatButton
-          label="Heavy"
           onClick={() => this.changeFilter('heavy')}
           style={style}
           hoverColor="#dfb836"
           backgroundColor={this.activeButton('heavy')}
-        />
+        >
+          HEAVY
+        </FlatButton>
       </div>
     );
   },
