@@ -1,5 +1,5 @@
 import React from 'react';
-import Legend from './Legend';
+import PlayerTable from './PlayerTable';
 import { Col } from 'react-bootstrap';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -12,7 +12,7 @@ const Main = React.createClass({
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <div className="main">
           <Col xs={12} md={5}>
-            <Legend {...this.props} />
+            <PlayerTable {...this.props} />
           </Col>
           <Col className="content" xs={12} md={7}>
             <StatsChart />

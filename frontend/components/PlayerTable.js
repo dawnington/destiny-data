@@ -22,7 +22,7 @@ const styles = {
   },
 };
 
-const Legend = React.createClass({
+const PlayerTable = React.createClass({
   getInitialState() {
     return { players: PlayerStore.all(), full: false };
   },
@@ -96,4 +96,4 @@ const Legend = React.createClass({
   },
 });
 
-export default Legend;
+export default PlayerTable;
