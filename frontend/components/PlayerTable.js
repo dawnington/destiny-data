@@ -26,6 +26,9 @@ const styles = {
     width: '50px',
     paddingLeft: '0px',
   },
+  button: {
+    marginTop: '10px',
+  },
 };
 
 const PlayerTable = React.createClass({

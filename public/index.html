@@ -9,11 +9,23 @@
     <link rel="stylesheet" href="/public/css/style.css">
   </head>
   <body>
-    <h1>DESTINY DATA</h1>
-    <div>A simple PvP comparison tool</div>
+    <div class="header">
+      <div>
+        <h1>DESTINY DATA</h1>
+        <div>A simple PvP comparison tool</div>
+      </div>
+      <a class="git-link" href="https://github.com/dawnington/destiny-data" target="_blank" data-toggle="tooltip" title="Fork me on GitHub">
+        <li class="git-icon-container">
+          <i class="fa fa-github-alt"></i>
+        </li>
+        <!-- <button class="git-icon-container" data-toggle="tooltip" title="Fork me on GitHub"> -->
+        <!-- </button> -->
+      </a>
+    </div>
     <div id="root">
       <p>Loading....</p>
       <div class="chart"></div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
       <script src="//d3js.org/d3.v3.min.js"></script>
       <script src="/public/javascript/bundle.js"></script>
